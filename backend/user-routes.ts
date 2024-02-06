@@ -11,6 +11,7 @@ import {
   getUserByUsername,
   searchUsers,
   removeUserFromResults,
+  seedDatabase,
 } from "./database";
 import { User } from "../src/models/user";
 import { ensureAuthenticated, validateMiddleware } from "./helpers";
@@ -93,5 +94,11 @@ router.patch(
     res.sendStatus(204);
   }
 );
+
+router.delete("/seed", (req, res) => {
+  seedDatabase();
+  res.status(200);
+  res.json({ message: "Database is reset. " });
+});
 
 export default router;
